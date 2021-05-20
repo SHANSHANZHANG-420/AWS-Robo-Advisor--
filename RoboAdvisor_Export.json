@@ -1,0 +1,182 @@
+{
+  "metadata": {
+    "schemaVersion": "1.0",
+    "importType": "LEX",
+    "importFormat": "JSON"
+  },
+  "resource": {
+    "name": "RoboAdvisor",
+    "version": "1",
+    "intents": [
+      {
+        "name": "RecommendPortfolio",
+        "version": "14",
+        "fulfillmentActivity": {
+          "codeHook": {
+            "uri": "arn:aws:lambda:ap-southeast-2:208157291978:function:recommendPortfolio",
+            "messageVersion": "1.0"
+          },
+          "type": "CodeHook"
+        },
+        "sampleUtterances": [
+          "I want to save money for my retirement",
+          "I'm {age} and i would like to invest for my retirement",
+          "I'm {age} and I want to invest for my retirement",
+          "I want the best option to invest for my retirement",
+          "I'm worried about my retirement",
+          "I want to invest for my retirement",
+          "I would like to invest for my retirement",
+          "I want to make a retirement plan"
+        ],
+        "slots": [
+          {
+            "sampleUtterances": [],
+            "slotType": "AMAZON.NUMBER",
+            "obfuscationSetting": "NONE",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "How old are you?"
+                }
+              ],
+              "maxAttempts": 2
+            },
+            "priority": 2,
+            "name": "age"
+          },
+          {
+            "sampleUtterances": [],
+            "slotType": "AMAZON.US_FIRST_NAME",
+            "obfuscationSetting": "NONE",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "Thank you for trusting me to help, could you please give me your name?"
+                }
+              ],
+              "maxAttempts": 2
+            },
+            "priority": 1,
+            "name": "firstName"
+          },
+          {
+            "sampleUtterances": [],
+            "slotType": "AMAZON.NUMBER",
+            "obfuscationSetting": "NONE",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "How much do you want to invest?"
+                }
+              ],
+              "maxAttempts": 2
+            },
+            "priority": 4,
+            "name": "investmentAmount"
+          },
+          {
+            "sampleUtterances": [],
+            "slotType": "riskLevel",
+            "slotTypeVersion": "4",
+            "obfuscationSetting": "DEFAULT_OBFUSCATION",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "What level of investment risk would you like to take?"
+                }
+              ],
+              "responseCard": "{\"version\":1,\"contentType\":\"application/vnd.amazonaws.card.generic\",\"genericAttachments\":[{\"imageUrl\":\"data:image/png;base64,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\",\"subTitle\":\"No risk at all\",\"title\":\"None\",\"buttons\":[{\"text\":\"None\",\"value\":\"None\"}]},{\"imageUrl\":\"https://cdn1.iconfinder.com/data/icons/cryptocurrency-set-2018/375/Asset_1480-128.png\",\"subTitle\":\"Just a bit risk \",\"title\":\"Very low or low \",\"buttons\":[{\"text\":\"Very low\",\"value\":\"Low\"},{\"text\":\"Low\",\"value\":\"Low\"}]},{\"imageUrl\":\"https://cdn1.iconfinder.com/data/icons/cryptocurrency-set-2018/375/Asset_1480-128.png\",\"subTitle\":\"Let's start becoming wild\",\"title\":\"Medium\",\"buttons\":[{\"text\":\"Medium\",\"value\":\"Medium\"}]},{\"imageUrl\":\"https://cdn1.iconfinder.com/data/icons/cryptocurrency-set-2018/375/Asset_1480-128.png\",\"subTitle\":\"I have no fear\",\"title\":\"High or Very High\",\"buttons\":[{\"text\":\"High\",\"value\":\"High\"},{\"text\":\"Very High\",\"value\":\"Very High\"}]}]}",
+              "maxAttempts": 2
+            },
+            "priority": 5,
+            "defaultValueSpec": {
+              "defaultValueList": []
+            },
+            "name": "riskLevel"
+          }
+        ],
+        "dialogCodeHook": {
+          "uri": "arn:aws:lambda:ap-southeast-2:208157291978:function:recommendPortfolio",
+          "messageVersion": "1.0"
+        }
+      }
+    ],
+    "slotTypes": [
+      {
+        "description": "investment risk ",
+        "name": "riskLevel",
+        "version": "4",
+        "enumerationValues": [
+          {
+            "value": "High",
+            "synonyms": [
+              "high"
+            ]
+          },
+          {
+            "value": "Very Low",
+            "synonyms": [
+              "Very low"
+            ]
+          },
+          {
+            "value": "Low",
+            "synonyms": [
+              "Minimal"
+            ]
+          },
+          {
+            "value": "Very High",
+            "synonyms": [
+              "Maximum"
+            ]
+          },
+          {
+            "value": "Medium",
+            "synonyms": [
+              "average"
+            ]
+          },
+          {
+            "value": "None",
+            "synonyms": [
+              "no risk"
+            ]
+          }
+        ],
+        "valueSelectionStrategy": "TOP_RESOLUTION"
+      }
+    ],
+    "voiceId": "Salli",
+    "childDirected": false,
+    "locale": "en-US",
+    "idleSessionTTLInSeconds": 300,
+    "clarificationPrompt": {
+      "messages": [
+        {
+          "contentType": "PlainText",
+          "content": "Sorry, can you please repeat that?"
+        }
+      ],
+      "maxAttempts": 2
+    },
+    "abortStatement": {
+      "messages": [
+        {
+          "contentType": "PlainText",
+          "content": "Sorry, I could not understand. Goodbye."
+        }
+      ]
+    },
+    "detectSentiment": false,
+    "enableModelImprovements": true
+  }
+}
